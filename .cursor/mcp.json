@@ -1,0 +1,56 @@
+{
+  "mcpServers": {
+    "motion-dev": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@orkait-ai/motion-dev-react-mcp"
+      ],
+      "env": {}
+    },
+    "heroui-react": {
+      "command": "npx -y @heroui/react-mcp@latest",
+      "env": {},
+      "args": []
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "firecrawl-mcp"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-cfc4b71741ec41979f284c59a6321a1d"
+      }
+    },
+    "supabase": {
+      "url": "https://mcp.supabase.com/mcp?project_ref=cdvzkaiphemixnkacfli"
+    },
+    "next-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "next-devtools-mcp@latest"
+      ]
+    },
+    "hugeicons": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@hugeicons/mcp-server"
+      ]
+    },
+    "Mintlify": {
+      "type": "http",
+      "url": "https://mintlify.com/docs/mcp"
+    },
+    "Mintlify MCP": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote@latest",
+        "https://mcp.mintlify.com"
+      ]
+    }
+  }
+}

@@ -1,0 +1,106 @@
+---
+description: Mazed design system adapted for the Mintlify-powered docs — brand colors, typography, docs.json theming, MDX component conventions, and dual-mode image rules. Apply when writing or editing any docs page, docs.json, or custom styling.
+alwaysApply: true
+---
+
+# Mazed Docs Design System
+
+The docs must feel like an extension of the Mazed app ([app.mazed.ai](https://app.mazed.ai)): minimalist, contrast-driven, elegant. No sci-fi or overly "techie" aesthetics. Dark mode is the default; every page must read perfectly in both modes.
+
+## Design Principles
+
+- **Minimalism & reduction.** Every element must earn its place. Prefer plain prose over decorated boxes. Whitespace is an active design element — let content breathe.
+- **Contrast-driven hierarchy.** Guide the eye with size, weight, and luminance — not vibrant colors. Hierarchy should survive grayscale. Meet WCAG AA: 4.5:1 for body text, 3:1 for large text and UI elements.
+- **Never rely on color alone** to convey meaning. Pair color with icons or labels.
+- **Restraint with components.** Mintlify ships many MDX components; the Mazed look comes from using few of them, deliberately. A page of clean prose with one well-placed component beats a page stacked with callouts, cards, and accordions.
+
+## Brand Colors
+
+| Color | Hex | Role |
+|-------|-----|------|
+| Brand Green | `#4DC991` | Primary accent — links/accents on dark backgrounds |
+| Brand Green (light-mode) | `#0a7c4a` | Accessible green for text/links on white (raw `#4DC991` fails WCAG AA on white) |
+| Brand Green Dark BG | `#0E291C` | Green-tinted background in dark mode |
+| Brand Green Light BG | `#E8F8F0` | Green-tinted background in light mode |
+| Brand Blue | `#0066FF` | Secondary accent — info, feature highlights |
+| Brand Blue Dark BG | `#00193F` | Blue-tinted background in dark mode |
+| Brand Blue Light BG | `#E6F0FF` | Blue-tinted background in light mode |
+
+### `docs.json` color mapping
+
+```json
+{
+  "colors": {
+    "primary": "#0a7c4a",
+    "light": "#4DC991",
+    "dark": "#0a7c4a"
+  },
+  "appearance": {
+    "default": "dark"
+  }
+}
+```
+
+- `primary` drives light-mode accents — use the darkened green so links pass contrast on white.
+- `light` drives dark-mode accents — the true brand green pops on near-black.
+- Never introduce other accent hexes in content or custom CSS. Green is primary, blue is secondary, everything else is neutral grayscale.
+
+## Typography
+
+- **Satoshi** is the Mazed primary typeface (headings, body, UI). Configure it in `docs.json` via the `fonts` field with self-hosted/Fontshare `woff2` sources; fall back to Mintlify's default sans if Satoshi can't be loaded reliably.
+- Code, paths, commands, IDs, and technical values always use inline code or code blocks (Mintlify renders these in mono — matching the app's Geist Mono role for metadata/technical text).
+- Headings use sentence case. Keep them short and scannable.
+- Don't fake hierarchy with bold paragraphs — use real heading levels so the table of contents stays correct.
+
+## Writing & Content Style
+
+- Active voice, second person ("you"). One idea per sentence.
+- Bold for UI elements the reader clicks: Click **Settings**.
+- Curly quotes for entity names embedded in sentences ("Concierge Voice").
+- Page frontmatter: every page needs `title` and a one-line `description` (plain, informative, no marketing fluff).
+- Don't prefix content with "Success:" / "Warning:" in text — semantic callout components already convey that.
+
+## Mintlify Component Conventions
+
+Use components sparingly and only when they add structure prose can't:
+
+- **Callouts** (`<Note>`, `<Tip>`, `<Warning>`, `<Info>`, `<Check>`): max one or two per page. Choose by semantic meaning, never for visual variety. `<Warning>` only for actions with real consequences (data loss, billing, breaking changes).
+- **`<Steps>`**: for any sequential procedure of 3+ actions. Don't use numbered markdown lists for procedures.
+- **`<Card>` / `<CardGroup>`**: only on landing/overview pages for navigation, 2 columns max. Every card gets an icon. Never use cards to decorate body content.
+- **`<Tabs>`**: for genuine alternatives (e.g. different languages, npm vs. yarn) — not for hiding content.
+- **`<CodeGroup>`**: when showing the same operation in multiple languages/tools. Always set a language and filename/label on code blocks.
+- **`<Accordion>`**: only for genuinely optional deep-dive content (troubleshooting, edge cases). Never hide essential steps in accordions.
+- **`<Frame>`**: wrap every screenshot. Add a `caption` when the image isn't self-explanatory.
+
+### Icons
+
+Set `"icons": { "library": "lucide" }` in `docs.json` — the app uses Lucide, so the docs must too. Use icons in cards, navigation groups, and anchors; keep them literal and recognizable, not decorative.
+
+## Images & Dual-Mode
+
+- Every screenshot of the app is taken in **dark mode** (the app default) unless the page is specifically about light mode.
+- For hero/marketing-style images, provide both variants and toggle by theme:
+
+```mdx
+<img className="block dark:hidden" src="/images/example-light.png" alt="..." />
+<img className="hidden dark:block" src="/images/example-dark.png" alt="..." />
+```
+
+- Keep screenshots tightly cropped to the relevant UI. No browser chrome unless the URL matters.
+- Always write meaningful `alt` text.
+
+## Custom CSS Boundaries
+
+Mintlify allows custom CSS, but the bar for adding any is high:
+
+- No overrides of Mintlify's layout, spacing, or component internals — theme drift makes upgrades painful.
+- If a brand touch is truly needed (e.g. a status pill matching the app), scope it to a single class, use the brand colors above with explicit light/dark values, and verify contrast in both modes.
+- Never import third-party stylesheets.
+
+## Checklist Before a Page Is Done
+
+1. Renders correctly in **both** dark and light mode.
+2. Headings form a logical outline (no skipped levels).
+3. At most 1–2 callouts; no decorative component stacking.
+4. All code blocks have a language; all images have alt text and a `<Frame>`.
+5. Links use descriptive text (never "click here").
