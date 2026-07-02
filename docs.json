@@ -10,9 +10,18 @@
   "appearance": {
     "default": "dark"
   },
-  "favicon": {
-    "light": "/favicon-light.svg",
-    "dark": "/favicon-dark.svg"
+  "favicon": "/favicon.svg",
+  "fonts": {
+    "family": "Satoshi",
+    "source": "/fonts/Satoshi-Variable.woff2",
+    "format": "woff2",
+    "weight": 400,
+    "heading": {
+      "family": "Satoshi",
+      "source": "/fonts/Satoshi-Variable.woff2",
+      "format": "woff2",
+      "weight": 700
+    }
   },
   "icons": {
     "library": "fontawesome"
