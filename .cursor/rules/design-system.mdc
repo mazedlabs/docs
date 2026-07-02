@@ -74,7 +74,7 @@ Use components sparingly and only when they add structure prose can't:
 
 ### Icons
 
-Set `"icons": { "library": "lucide" }` in `docs.json` — the app uses Lucide, so the docs must too. Use icons in cards, navigation groups, and anchors; keep them literal and recognizable, not decorative.
+Set `"icons": { "library": "fontawesome" }` in `docs.json`. Always use the **solid** style: set `iconType: "solid"` (or `"iconType": "solid"` in `docs.json` entries) wherever an icon is declared, so icon weight stays consistent site-wide. Icon names must match the [Font Awesome catalog](https://fontawesome.com/icons) exactly. Use icons in cards, navigation groups, and anchors; keep them literal and recognizable, not decorative.
 
 ## Images & Dual-Mode
 
